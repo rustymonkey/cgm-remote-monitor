@@ -229,6 +229,12 @@
     options.order = ( $('#rp_oldestontop').is(':checked') ? report_plugins.consts.ORDER_OLDESTONTOP : report_plugins.consts.ORDER_NEWESTONTOP );
     options.width = parseInt($('#rp_size :selected').attr('x'));
     options.height = parseInt($('#rp_size :selected').attr('y'));
+    options.loopalyzer = $("#loopalyzer").hasClass( "selected" ); // We only want to run through Loopalyzer if that tab is selected
+    if (options.loopalyzer) {
+      options.iob = true;
+      options.cob = true;
+      options.openAps = true;
+    }
     
     var matchesneeded = 0;
 
@@ -510,6 +516,7 @@
 
       if (plugin.name == 'daytoday' && ! $('#daytoday').hasClass('selected')) skipRender = true;
       if (plugin.name == 'treatments' && ! $('#treatments').hasClass('selected')) skipRender = true;
+      if (plugin.name == 'loopalyzer' && ! $('#loopalyzer').hasClass('selected')) skipRender = true;
 
       if (skipRender) {
         console.log('Skipping ',plugin.name);
